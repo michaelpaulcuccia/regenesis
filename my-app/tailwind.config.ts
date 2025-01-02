@@ -8,9 +8,15 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx}", // If you use the `app` directory
   ],
   safelist: [
+    // IF A COLOR or STYLE ISN"T APPEARING IN ADD IT TO SAFELIST
     "bg-blue-400",
     "bg-yellow-50",
-    // IF A COLOR ISN"T APPEARING IN ADD IT TO SAFELIST
+    "w-[50%]",
+    "flex-col",
+    "gap-y-2",
+    "mt-4",
+    "justify-end",
+    "items-end",
   ],
   theme: {
     extend: {
@@ -18,6 +24,9 @@ const config: Config = {
         ...defaultTheme.colors, // Ensure base colors remain
         background: "var(--background)",
         foreground: "var(--foreground)",
+      },
+      width: {
+        50: "50%",
       },
     },
   },

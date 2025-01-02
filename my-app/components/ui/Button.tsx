@@ -4,7 +4,7 @@ import Link from "next/link";
 
 type ButtonProps = {
   text: string; // Button Text
-  color?: "primary" | "secondary" | "danger";
+  color?: "primary" | "secondary" | "danger" | "success";
   type?: "button" | "submit" | "reset"; // HTML button types
   /*
     type="button"
@@ -35,6 +35,7 @@ const Button: React.FC<ButtonProps> = ({
     primary: "bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-300",
     secondary: "bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-300",
     danger: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-300",
+    success: "bg-green-500 text-white hover:bg-green-600 focus:ring-green-300",
   };
 
   if (href) {
