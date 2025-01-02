@@ -8,7 +8,7 @@ import PageContainer from "@components/ui/PageContainer";
 import { useUser } from "context/UserContext";
 
 const StepOne = () => {
-  const { user, addUserToCompany, completeScreen } = useUser();
+  const { user, updateCompanyName, completeScreen } = useUser();
   const [companyName, setCompanyName] = useState<string>("");
   const router = useRouter();
 
@@ -24,7 +24,8 @@ const StepOne = () => {
     e.preventDefault();
 
     // Add company name and complete screen 1
-    addUserToCompany(user.username, user.email, user.password);
+    //addUserToCompany(user.username, user.email, user.password);
+    updateCompanyName(companyName);
 
     completeScreen("screen1");
 

@@ -23,6 +23,7 @@ interface UserContextType {
   startEnrollment: () => void;
   completeScreen: (screenName: string) => void;
   addUserToCompany: (username: string, email: string, password: string) => void;
+  updateCompanyName: (companyName: string) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -82,6 +83,19 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  const updateCompanyName = (companyName: string) => {
+    if (user) {
+      const updatedUser = {
+        ...user,
+        company: {
+          ...user.company,
+          companyName,
+        },
+      };
+      setUser(updatedUser);
+    }
+  };
+
   const addUserToCompany = (
     username: string,
     email: string,
@@ -108,6 +122,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
         startEnrollment,
         completeScreen,
         addUserToCompany,
+        updateCompanyName,
       }}
     >
       {children}
