@@ -13,8 +13,7 @@ const StepOne = () => {
   const router = useRouter();
 
   if (!user) {
-    // Redirect if the user is not logged in (should not happen in reality)
-    router.push("/");
+    //router.push("/");
     return null;
   }
 
@@ -23,10 +22,7 @@ const StepOne = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Add company name and complete screen 1
-    //addUserToCompany(user.username, user.email, user.password);
     updateCompanyName(companyName);
-
     completeScreen("screen1");
 
     router.push("/enrollment/stepTwo");

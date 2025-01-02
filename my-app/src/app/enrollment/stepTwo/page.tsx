@@ -10,13 +10,13 @@ const StepTwo = () => {
 
   // Ensure user exists
   if (!user) {
-    router.push("/");
-    return null; // Exit early if no user is found
+    //router.push("/");
+    return null;
   }
 
   // Ensure company name is set
   if (!user.company.companyName) {
-    router.push("/enrollment/stepOne");
+    //router.push("/enrollment/stepOne");
     return null; // Exit early if company name is missing
   }
 
