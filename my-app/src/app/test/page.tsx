@@ -8,6 +8,7 @@ import PageContainer from "@components/ui/PageContainer";
 const MyForm = () => {
   const [formData, setFormData] = useState({
     username: "",
+    email: "",
     password: "",
   });
 
@@ -21,11 +22,19 @@ const MyForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Basic email validation
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailPattern.test(formData.email)) {
+      alert("Please enter a valid email.");
+      return;
+    }
+
     console.log("Form Data Submitted:", formData);
   };
 
   const handleReset = () => {
-    setFormData({ username: "", password: "" });
+    setFormData({ username: "", email: "", password: "" });
   };
 
   return (
@@ -33,7 +42,7 @@ const MyForm = () => {
       <Card selfCentered={true}>
         <form
           onSubmit={handleSubmit}
-          onReset={handleReset} //NOT USED
+          onReset={handleReset}
           className="space-y-6"
         >
           <Input
@@ -45,6 +54,15 @@ const MyForm = () => {
             placeholder="Enter your username"
             name="username"
             value={formData.username}
+            onChange={handleChange}
+          />
+          <Input
+            label="Email"
+            type="email"
+            required={true}
+            placeholder="Enter your email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
           />
           <Input

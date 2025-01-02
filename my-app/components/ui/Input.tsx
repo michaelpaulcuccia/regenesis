@@ -7,9 +7,9 @@ type InputProps = {
   minLength?: number;
   maxLength?: number;
   placeholder?: string;
-  name: string; // This should be required and match the name in the form state
-  value: string; // The value prop should always be required in a controlled input
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // Type for input change event
+  name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Input: React.FC<InputProps> = ({
@@ -24,14 +24,14 @@ const Input: React.FC<InputProps> = ({
   onChange,
 }) => {
   return (
-    <div className="flex flex-row items-center space-x-6 mb-2 mt-2">
+    <div className="flex flex-col space-y-2 mb-2 mt-2">
       <label htmlFor={name} className="text-sm font-medium text-gray-700">
         {label}
       </label>
       <input
         type={type}
-        id={name} // Use the name prop for id as well for better accessibility
-        name={name} // Ensure the name matches the key in formData
+        id={name}
+        name={name}
         placeholder={placeholder}
         required={required}
         minLength={minLength}
