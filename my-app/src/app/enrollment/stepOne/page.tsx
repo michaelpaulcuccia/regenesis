@@ -1,6 +1,6 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation"; // for navigation
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Input from "@components/ui/Input";
 import Button from "@components/ui/Button";
 import Card from "@components/ui/Card";
@@ -13,19 +13,28 @@ const StepOne = () => {
   const router = useRouter();
 
   if (!user) {
-    //router.push("/");
     return null;
   }
 
-  console.log(user);
+  //NOTE: had some issues with the companyName re-rendering so I added a check and useEffect to ensure the state updates properly
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (user?.company?.companyName) {
+      completeScreen("screen1");
+      console.log("Navigating to step two...");
+      router.push("/enrollment/stepTwo");
+    }
+  }, [user?.company?.companyName]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Setting company name:", companyName);
 
     updateCompanyName(companyName);
-    completeScreen("screen1");
 
-    router.push("/enrollment/stepTwo");
+    if (user?.company?.companyName) {
+      updateCompanyName(companyName);
+    }
   };
 
   return (

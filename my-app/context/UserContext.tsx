@@ -92,6 +92,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
           companyName,
         },
       };
+
       setUser(updatedUser);
     }
   };

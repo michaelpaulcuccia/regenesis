@@ -1,29 +1,23 @@
 "use client";
-import { useRouter } from "next/navigation"; // for navigation
+import { useRouter } from "next/navigation";
 import { useUser } from "context/UserContext";
 import Card from "@components/ui/Card";
 import PageContainer from "@components/ui/PageContainer";
 
 const StepTwo = () => {
   const { user } = useUser();
-  const router = useRouter(); // for navigation
+  const router = useRouter();
 
-  // Ensure user exists
+  console.log("StepTwo user", user);
+
+  // Ensure a user exists
   if (!user) {
-    //router.push("/");
     return null;
-  }
-
-  // Ensure company name is set
-  if (!user.company.companyName) {
-    //router.push("/enrollment/stepOne");
-    return null; // Exit early if company name is missing
   }
 
   // Ensure screen1 is completed before allowing access to stepTwo
   if (!user.enrollment.completedScreens.includes("screen1")) {
-    //router.push("/enrollment/stepOne");
-    return null; // Exit early if screen1 is not completed
+    return null;
   }
 
   return (
