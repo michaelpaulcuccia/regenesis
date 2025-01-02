@@ -4,6 +4,7 @@ import Input from "@components/ui/Input";
 import Button from "@components/ui/Button";
 import Card from "@components/ui/Card";
 import PageContainer from "@components/ui/PageContainer";
+import ButtonWrapper from "@components/ui/ButtonWrapper";
 
 const MyForm = () => {
   const [formData, setFormData] = useState({
@@ -75,10 +76,10 @@ const MyForm = () => {
             value={formData.password}
             onChange={handleChange}
           />
-          <div className="flex justify-end items-end flex-col gap-y-2 mt-4">
+          <ButtonWrapper>
             <Button text="Submit Form" type="submit" color="secondary" />
             {/* <Button text="Reset Form" type="reset" color="success" /> */}
-          </div>
+          </ButtonWrapper>
         </form>
       </Card>
     </PageContainer>
