@@ -1,41 +1,24 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Input from "@components/ui/Input";
 import Button from "@components/ui/Button";
 import Card from "@components/ui/Card";
 import PageContainer from "@components/ui/PageContainer";
 import ButtonWrapper from "@components/ui/ButtonWrapper";
+import { useUser } from "context/UserContext";
 
 const MyForm = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const { signUp } = useUser();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Basic email validation
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!emailPattern.test(formData.email)) {
-      alert("Please enter a valid email.");
-      return;
-    }
-
-    console.log("Form Data Submitted:", formData);
-  };
-
-  const handleReset = () => {
-    setFormData({ username: "", email: "", password: "" });
+    signUp(username, email, password);
+    router.push("/enrollment/stepOne");
   };
 
   return (
@@ -43,7 +26,7 @@ const MyForm = () => {
       <Card selfCentered={true}>
         <form
           onSubmit={handleSubmit}
-          onReset={handleReset}
+          //onReset={handleReset}
           className="space-y-6"
         >
           <Input
@@ -54,8 +37,8 @@ const MyForm = () => {
             maxLength={15}
             placeholder="Enter your username"
             name="username"
-            value={formData.username}
-            onChange={handleChange}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <Input
             label="Email"
@@ -63,8 +46,8 @@ const MyForm = () => {
             required={true}
             placeholder="Enter your email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Input
             label="Password"
@@ -73,11 +56,11 @@ const MyForm = () => {
             minLength={6}
             placeholder="Enter your password"
             name="password"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <ButtonWrapper>
-            <Button text="Submit Form" type="submit" color="secondary" />
+            <Button text="Submit" type="submit" color="secondary" />
             {/* <Button text="Reset Form" type="reset" color="success" /> */}
           </ButtonWrapper>
         </form>

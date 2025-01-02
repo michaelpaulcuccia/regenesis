@@ -6,7 +6,7 @@ import PageContainer from "@components/ui/PageContainer";
 export default function page() {
   return (
     <PageContainer>
-      <Button text="Go to Test Page" href="/test" color="primary" />
+      <Button text="Go to Test Page" href="/signup" color="primary" />
       <br />
       <Button text="Submit Form" type="submit" color="secondary" />
       <br />
