@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
 }) => {
   const baseStyles =
-    "px-4 py-2 rounded-lg font-medium focus:outline-none focus:ring-2 transition-all";
+    "px-4 py-2 rounded-lg font-[16px] font-semibold focus:outline-none focus:ring-2 transition-all";
 
   const colorStyles = {
     primary: "bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-300",
@@ -39,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
 
   if (href) {
     return (
-      <Link href={href} className="inline-block">
+      <Link href={href} className="inline-block ">
         <div
           className={`${baseStyles} ${colorStyles[color]} ${
             disabled && "opacity-50 cursor-not-allowed"
