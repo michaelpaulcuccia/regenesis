@@ -18,7 +18,7 @@ const MyForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     signUp(username, email, password);
-    router.push("/enrollment/stepOne");
+    router.push("/enrollment");
   };
 
   return (

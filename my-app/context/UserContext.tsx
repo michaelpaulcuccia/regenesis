@@ -1,18 +1,18 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
-interface Enrollment {
-  hasEnrolled: boolean;
-  completedScreens: string[];
-}
-
 interface User {
   username: string;
   email: string;
   password: string;
-  enrollment: Enrollment;
+  hasEnrolled: boolean;
   company: {
     companyName: string;
-    users: Array<{ username: string; email: string; password: string }>;
+    usersCompany: Array<{
+      username: string;
+      email: string;
+      password: string;
+      hasEnrolled: boolean;
+    }>;
   };
 }
 
@@ -20,8 +20,7 @@ interface UserContextType {
   user: User | null;
   signUp: (username: string, email: string, password: string) => void;
   signIn: (username: string, password: string) => void;
-  startEnrollment: () => void;
-  completeScreen: (screenName: string) => void;
+  updateEnrollment: () => void;
   addUserToCompany: (username: string, email: string, password: string) => void;
   updateCompanyName: (companyName: string) => void;
 }
@@ -39,13 +38,10 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
       username,
       email,
       password,
-      enrollment: {
-        hasEnrolled: false,
-        completedScreens: [],
-      },
+      hasEnrolled: false,
       company: {
         companyName: "",
-        users: [],
+        usersCompany: [],
       },
     };
     setUser(newUser);
@@ -57,26 +53,29 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const startEnrollment = () => {
+  const updateEnrollment = () => {
     if (user) {
       setUser({
         ...user,
-        enrollment: {
-          ...user.enrollment,
-          hasEnrolled: false,
-          completedScreens: [],
-        },
+        hasEnrolled: true,
       });
     }
   };
 
-  const completeScreen = (screenName: string) => {
-    if (user && !user.enrollment.completedScreens.includes(screenName)) {
+  const addUserToCompany = (
+    username: string,
+    email: string,
+    password: string
+  ) => {
+    if (user) {
       const updatedUser = {
         ...user,
-        enrollment: {
-          ...user.enrollment,
-          completedScreens: [...user.enrollment.completedScreens, screenName],
+        company: {
+          ...user.company,
+          usersCompany: [
+            ...user.company.usersCompany,
+            { username, email, password, hasEnrolled: false },
+          ],
         },
       };
       setUser(updatedUser);
@@ -97,31 +96,13 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const addUserToCompany = (
-    username: string,
-    email: string,
-    password: string
-  ) => {
-    if (user) {
-      const updatedUser = {
-        ...user,
-        company: {
-          ...user.company,
-          users: [...user.company.users, { username, email, password }],
-        },
-      };
-      setUser(updatedUser);
-    }
-  };
-
   return (
     <UserContext.Provider
       value={{
         user,
         signUp,
         signIn,
-        startEnrollment,
-        completeScreen,
+        updateEnrollment,
         addUserToCompany,
         updateCompanyName,
       }}
