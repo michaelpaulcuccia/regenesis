@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useUser } from "context/UserContext";
 import Input from "@components/ui/Input";
 import Button from "@components/ui/Button";
@@ -12,6 +13,14 @@ const Page = () => {
   const [users, setUsers] = useState([
     { username: "", email: "", password: "" },
   ]);
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect user if not signed in
+    if (!user) {
+      router.replace("/restricted");
+    }
+  }, [user, router]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
