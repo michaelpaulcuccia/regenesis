@@ -17,6 +17,7 @@ const config: Config = {
     "mt-4",
     "justify-end",
     "items-end",
+    "text-center",
   ],
   theme: {
     extend: {
