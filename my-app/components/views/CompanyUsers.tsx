@@ -1,3 +1,5 @@
+// CompanyUsers.tsx
+
 "use client";
 import { useState } from "react";
 import { useUser } from "context/UserContext";
@@ -12,7 +14,7 @@ type CompanyUsersProps = {
 };
 
 const CompanyUsers: React.FC<CompanyUsersProps> = ({ onNext, onBack }) => {
-  const { addUserToCompany } = useUser();
+  const { addUserToCompany } = useUser(); // Update to the multi-user function
   const [users, setUsers] = useState([{ username: "", email: "" }]);
 
   const handleUserChange = (
@@ -37,13 +39,16 @@ const CompanyUsers: React.FC<CompanyUsersProps> = ({ onNext, onBack }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    users.forEach((user) => {
-      if (user.username.trim() && user.email.trim()) {
-        addUserToCompany(user.username, user.email);
-      }
-    });
+    // Filter out any users with empty fields and add the valid ones
+    const validUsers = users.filter(
+      (user) => user.username.trim() && user.email.trim()
+    );
 
-    onNext();
+    if (validUsers.length > 0) {
+      addUserToCompany(validUsers); // Call to add multiple users at once
+    }
+
+    onNext(); // Proceed to the next step after adding users
   };
 
   return (

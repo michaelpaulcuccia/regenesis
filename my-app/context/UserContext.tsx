@@ -19,7 +19,7 @@ interface UserContextType {
   signUp: (username: string, email: string, password: string) => void;
   signIn: (username: string, password: string) => void;
   updateEnrollment: () => void;
-  addUserToCompany: (username: string, email: string) => void;
+  addUserToCompany: (users: Array<{ username: string; email: string }>) => void;
   updateCompanyName: (companyName: string) => void;
 }
 
@@ -60,17 +60,23 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const addUserToCompany = (username: string, email: string) => {
-    if (user) {
-      const updatedUser = {
-        ...user,
-        company: {
-          ...user.company,
-          usersCompany: [...user.company.usersCompany, { username, email }],
-        },
-      };
-      setUser(updatedUser);
+  const addUserToCompany = (
+    users: Array<{ username: string; email: string }>
+  ) => {
+    if (!user) {
+      console.error("User is not signed in.");
+      return;
     }
+
+    const updatedUser = {
+      ...user,
+      company: {
+        ...user.company,
+        usersCompany: [...user.company.usersCompany, ...users],
+      },
+    };
+
+    setUser(updatedUser);
   };
 
   const updateCompanyName = (companyName: string) => {
