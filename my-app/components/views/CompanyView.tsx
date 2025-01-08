@@ -11,48 +11,22 @@ type CompanyViewProps = {
 };
 
 const CompanyView: React.FC<CompanyViewProps> = ({ onNext }) => {
-  const { updateCompanyName, addUserToCompany } = useUser();
+  const { updateCompanyName } = useUser();
   const [companyName, setCompanyName] = useState("");
-  const [users, setUsers] = useState([{ username: "", email: "" }]);
+  const [companyNameHasUpdated, setCompanyNameHasUpdated] = useState(false);
 
+  // Function to handle company name update when "Next" button is pressed
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log(companyName);
-
+    // Ensure company name is entered before proceeding
     if (companyName.trim()) {
-      updateCompanyName(companyName);
+      updateCompanyName(companyName); // Update company name in context
+      setCompanyNameHasUpdated(true); // Mark as updated
+      onNext(); // Proceed to next step
+    } else {
+      alert("Please enter a Company Name before proceeding.");
     }
-
-    users.forEach((user) => {
-      if (user.username.trim() && user.email.trim()) {
-        addUserToCompany(user.username, user.email);
-      }
-    });
-
-    setCompanyName("");
-    setUsers([{ username: "", email: "" }]);
-
-    onNext(); // Navigate to the next view
-  };
-
-  const handleUserChange = (
-    index: number,
-    field: "username" | "email",
-    value: string
-  ) => {
-    const updatedUsers = [...users];
-    updatedUsers[index][field] = value;
-    setUsers(updatedUsers);
-  };
-
-  const addMoreUserFields = () => {
-    setUsers([...users, { username: "", email: "" }]);
-  };
-
-  const removeUserField = (index: number) => {
-    const updatedUsers = users.filter((_, i) => i !== index);
-    setUsers(updatedUsers);
   };
 
   return (
@@ -69,45 +43,7 @@ const CompanyView: React.FC<CompanyViewProps> = ({ onNext }) => {
           onChange={(e) => setCompanyName(e.target.value)}
         />
 
-        <h3 className="text-md font-medium mb-2">Add Users</h3>
-        {users.map((userInput, index) => (
-          <div key={index} className="space-y-4 border-b pb-4 mb-4">
-            <Input
-              label="User Name"
-              type="text"
-              //required={true}
-              placeholder="Enter user name"
-              name={`username-${index}`}
-              value={userInput.username}
-              onChange={(e) =>
-                handleUserChange(index, "username", e.target.value)
-              }
-            />
-            <Input
-              label="Email"
-              type="email"
-              //required={true}
-              placeholder="Enter email"
-              name={`email-${index}`}
-              value={userInput.email}
-              onChange={(e) => handleUserChange(index, "email", e.target.value)}
-            />
-            <Button
-              text="Remove User"
-              color="danger"
-              type="button"
-              onClick={() => removeUserField(index)}
-            />
-          </div>
-        ))}
-
-        <Button
-          text="Add More Users"
-          color="success"
-          type="button"
-          onClick={addMoreUserFields}
-        />
-
+        {/* Only one "Next" button to handle submitting and updating */}
         <ButtonWrapper>
           <Button text="Next" color="primary" type="submit" />
         </ButtonWrapper>
