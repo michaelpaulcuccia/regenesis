@@ -13,17 +13,14 @@ type CompanyViewProps = {
 const CompanyView: React.FC<CompanyViewProps> = ({ onNext }) => {
   const { updateCompanyName } = useUser();
   const [companyName, setCompanyName] = useState("");
-  const [companyNameHasUpdated, setCompanyNameHasUpdated] = useState(false);
 
-  // Function to handle company name update when "Next" button is pressed
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     // Ensure company name is entered before proceeding
     if (companyName.trim()) {
-      updateCompanyName(companyName); // Update company name in context
-      setCompanyNameHasUpdated(true); // Mark as updated
-      onNext(); // Proceed to next step
+      updateCompanyName(companyName);
+      onNext();
     } else {
       alert("Please enter a Company Name before proceeding.");
     }
@@ -43,7 +40,6 @@ const CompanyView: React.FC<CompanyViewProps> = ({ onNext }) => {
           onChange={(e) => setCompanyName(e.target.value)}
         />
 
-        {/* Only one "Next" button to handle submitting and updating */}
         <ButtonWrapper>
           <Button text="Next" color="primary" type="submit" />
         </ButtonWrapper>

@@ -45,10 +45,10 @@ const CompanyUsers: React.FC<CompanyUsersProps> = ({ onNext, onBack }) => {
     );
 
     if (validUsers.length > 0) {
-      addUserToCompany(validUsers); // Call to add multiple users at once
+      addUserToCompany(validUsers);
     }
 
-    onNext(); // Proceed to the next step after adding users
+    onNext();
   };
 
   return (
@@ -56,7 +56,7 @@ const CompanyUsers: React.FC<CompanyUsersProps> = ({ onNext, onBack }) => {
       <h2 className="text-lg font-semibold mb-4">Add Company Users</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         {users.map((userInput, index) => (
-          <div key={index} className="space-y-4 border-b pb-4 mb-4">
+          <div key={index} className="space-y-4 border-b pb-4">
             <Input
               label="User Name"
               type="text"
@@ -91,7 +91,10 @@ const CompanyUsers: React.FC<CompanyUsersProps> = ({ onNext, onBack }) => {
           onClick={addMoreUserFields}
         />
 
-        <div className="flex flex-row justify-between">
+        <div
+          className="flex flex-row justify-between"
+          style={{ marginTop: "48px" }} //TODO: having tailwind.config.ts issues and can't get MT class to show up
+        >
           <Button
             text="Back"
             color="secondary"

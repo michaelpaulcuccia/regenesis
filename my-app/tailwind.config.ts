@@ -14,12 +14,13 @@ const config: Config = {
     "w-[50%]",
     "flex-col",
     "gap-y-2",
-    "mt-4",
+    "mt-8",
     "justify-end",
     "items-end",
     "text-center",
     "mt-5",
     "items-center",
+    "mt-12",
   ],
   theme: {
     extend: {
