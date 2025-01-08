@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { useUser } from "context/UserContext";
 import Input from "@components/ui/Input";
@@ -18,6 +17,8 @@ const CompanyView: React.FC<CompanyViewProps> = ({ onNext }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    console.log(companyName);
 
     if (companyName.trim()) {
       updateCompanyName(companyName);
@@ -55,7 +56,7 @@ const CompanyView: React.FC<CompanyViewProps> = ({ onNext }) => {
   };
 
   return (
-    <Card>
+    <Card selfCentered>
       <h2 className="text-lg font-semibold mb-4">Add Company Details</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <Input
@@ -75,7 +76,7 @@ const CompanyView: React.FC<CompanyViewProps> = ({ onNext }) => {
               label="User Name"
               type="text"
               //required={true}
-              placeholder="Enter username"
+              placeholder="Enter user name"
               name={`username-${index}`}
               value={userInput.username}
               onChange={(e) =>

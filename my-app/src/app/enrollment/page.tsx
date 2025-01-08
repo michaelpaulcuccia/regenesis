@@ -3,7 +3,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "context/UserContext";
 import CompanyView from "@components/views/CompanyView";
-import TermsView from "@components/views/TermsView"; // Placeholder for the next view
+import TermsView from "@components/views/TermsView";
+import EnrollmentCompletedView from "@components/views/EnrollmentCompletedView"; // Import the new view
 import PageContainer from "@components/ui/PageContainer";
 
 const Page = () => {
@@ -37,8 +38,12 @@ const Page = () => {
         <CompanyView onNext={() => navigateTo("TermsView")} />
       )}
       {currentView === "TermsView" && (
-        <TermsView onBack={() => navigateTo("CompanyView")} />
+        <TermsView
+          onBack={() => navigateTo("CompanyView")}
+          onNext={() => navigateTo("EnrollmentCompletedView")}
+        />
       )}
+      {currentView === "EnrollmentCompletedView" && <EnrollmentCompletedView />}
     </PageContainer>
   );
 };

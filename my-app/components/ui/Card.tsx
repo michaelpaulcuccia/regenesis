@@ -22,7 +22,11 @@ const Card: React.FC<CardProps> = ({
   );
 
   if (selfCentered) {
-    return <div className="flex justify-center h-auto">{cardContent}</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        {cardContent}
+      </div>
+    );
   }
 
   return cardContent;

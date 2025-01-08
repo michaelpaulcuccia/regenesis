@@ -19,6 +19,7 @@ const config: Config = {
     "items-end",
     "text-center",
     "mt-5",
+    "items-center",
   ],
   theme: {
     extend: {
