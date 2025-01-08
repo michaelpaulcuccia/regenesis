@@ -6,13 +6,12 @@ import Input from "@components/ui/Input";
 import Button from "@components/ui/Button";
 import Card from "@components/ui/Card";
 import PageContainer from "@components/ui/PageContainer";
+import ButtonWrapper from "@components/ui/ButtonWrapper";
 
 const Page = () => {
   const { updateCompanyName, addUserToCompany, user } = useUser();
   const [companyName, setCompanyName] = useState("");
-  const [users, setUsers] = useState([
-    { username: "", email: "", password: "" },
-  ]);
+  const [users, setUsers] = useState([{ username: "", email: "" }]);
   const router = useRouter();
 
   useEffect(() => {
@@ -30,18 +29,18 @@ const Page = () => {
     }
 
     users.forEach((user) => {
-      if (user.username.trim() && user.email.trim() && user.password.trim()) {
-        addUserToCompany(user.username, user.email, user.password);
+      if (user.username.trim() && user.email.trim()) {
+        addUserToCompany(user.username, user.email);
       }
     });
 
     setCompanyName("");
-    setUsers([{ username: "", email: "", password: "" }]);
+    setUsers([{ username: "", email: "" }]);
   };
 
   const handleUserChange = (
     index: number,
-    field: "username" | "email" | "password",
+    field: "username" | "email",
     value: string
   ) => {
     const updatedUsers = [...users];
@@ -50,7 +49,7 @@ const Page = () => {
   };
 
   const addMoreUserFields = () => {
-    setUsers([...users, { username: "", email: "", password: "" }]);
+    setUsers([...users, { username: "", email: "" }]);
   };
 
   const removeUserField = (index: number) => {
@@ -90,7 +89,7 @@ const Page = () => {
           {users.map((userInput, index) => (
             <div key={index} className="space-y-4 border-b pb-4 mb-4 relative">
               <Input
-                label={`Username ${index + 1}`}
+                label="User Name"
                 type="text"
                 required={true}
                 placeholder="Enter username"
@@ -101,7 +100,7 @@ const Page = () => {
                 }
               />
               <Input
-                label={`Email ${index + 1}`}
+                label="Email"
                 type="email"
                 required={true}
                 placeholder="Enter email"
@@ -109,17 +108,6 @@ const Page = () => {
                 value={userInput.email}
                 onChange={(e) =>
                   handleUserChange(index, "email", e.target.value)
-                }
-              />
-              <Input
-                label={`Password ${index + 1}`}
-                type="password"
-                required={true}
-                placeholder="Enter password"
-                name={`password-${index}`}
-                value={userInput.password}
-                onChange={(e) =>
-                  handleUserChange(index, "password", e.target.value)
                 }
               />
               <Button
@@ -131,14 +119,18 @@ const Page = () => {
             </div>
           ))}
 
-          <Button
-            text="Add More Users"
-            color="success"
-            type="button"
-            onClick={addMoreUserFields}
-          />
+          <div className="mt-5">
+            <Button
+              text="Add More Users"
+              color="success"
+              type="button"
+              onClick={addMoreUserFields}
+            />
+          </div>
 
-          <Button text="Next" color="primary" type="submit" />
+          <ButtonWrapper>
+            <Button text="Next" color="primary" type="submit" />
+          </ButtonWrapper>
         </form>
       </Card>
     </PageContainer>

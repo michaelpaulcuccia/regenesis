@@ -10,8 +10,6 @@ interface User {
     usersCompany: Array<{
       username: string;
       email: string;
-      password: string;
-      hasEnrolled: boolean;
     }>;
   };
 }
@@ -21,7 +19,7 @@ interface UserContextType {
   signUp: (username: string, email: string, password: string) => void;
   signIn: (username: string, password: string) => void;
   updateEnrollment: () => void;
-  addUserToCompany: (username: string, email: string, password: string) => void;
+  addUserToCompany: (username: string, email: string) => void;
   updateCompanyName: (companyName: string) => void;
 }
 
@@ -62,20 +60,13 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
-  const addUserToCompany = (
-    username: string,
-    email: string,
-    password: string
-  ) => {
+  const addUserToCompany = (username: string, email: string) => {
     if (user) {
       const updatedUser = {
         ...user,
         company: {
           ...user.company,
-          usersCompany: [
-            ...user.company.usersCompany,
-            { username, email, password, hasEnrolled: false },
-          ],
+          usersCompany: [...user.company.usersCompany, { username, email }],
         },
       };
       setUser(updatedUser);
