@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useUser } from "context/UserContext";
 import Input from "@components/ui/Input";
 import Button from "@components/ui/Button";
@@ -11,17 +11,17 @@ type CompanyUsersProps = {
 };
 
 const CompanyUsers: React.FC<CompanyUsersProps> = ({ onNext, onBack }) => {
-  const { user, addUserToCompany } = useUser();
+  const { addUserToCompany } = useUser();
   const [users, setUsers] = useState([{ username: "", email: "" }]);
 
-  useEffect(() => {
-    // Populate the form with existing company users from context
-    if (user?.company?.usersCompany?.length) {
-      if (user?.company?.usersCompany?.length > 0) {
-        setUsers(user?.company.usersCompany);
-      }
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   // Populate the form with existing company users from context
+  //   if (user?.company?.usersCompany?.length) {
+  //     if (user?.company?.usersCompany?.length > 0) {
+  //       setUsers(user.company.usersCompany);
+  //     }
+  //   }
+  // }, [user]);
 
   const handleUserChange = (
     index: number,
