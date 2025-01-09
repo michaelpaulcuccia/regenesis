@@ -3,7 +3,7 @@ import React from "react";
 interface StepperProps {
   steps: string[];
   activeStep: string;
-  onStepChange: (step: any) => void;
+  onStepChange: (step: string) => void;
 }
 
 const Stepper: React.FC<StepperProps> = ({

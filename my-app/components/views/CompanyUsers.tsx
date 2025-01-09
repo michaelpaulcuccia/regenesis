@@ -6,7 +6,6 @@ import { useUser } from "context/UserContext";
 import Input from "@components/ui/Input";
 import Button from "@components/ui/Button";
 import Card from "@components/ui/Card";
-import ButtonWrapper from "@components/ui/ButtonWrapper";
 
 type CompanyUsersProps = {
   onNext: () => void;
@@ -14,7 +13,7 @@ type CompanyUsersProps = {
 };
 
 const CompanyUsers: React.FC<CompanyUsersProps> = ({ onNext, onBack }) => {
-  const { addUserToCompany } = useUser(); // Update to the multi-user function
+  const { addUserToCompany } = useUser();
   const [users, setUsers] = useState([{ username: "", email: "" }]);
 
   const handleUserChange = (

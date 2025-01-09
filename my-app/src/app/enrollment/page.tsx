@@ -9,7 +9,12 @@ import TermsView from "@components/views/TermsView";
 import EnrollmentCompletedView from "@components/views/EnrollmentCompletedView";
 import PageContainer from "@components/ui/PageContainer";
 
-const steps = ["Create Company", "Add Users", "Terms of Use", "Completed"];
+const steps = [
+  "1. Create Company",
+  "2. Add Users",
+  "3. Terms of Use",
+  "4. Completed",
+];
 
 const Page = () => {
   const { user } = useUser();
@@ -39,13 +44,13 @@ const Page = () => {
   const getCurrentStep = () => {
     switch (currentView) {
       case "CompanyView":
-        return "Create Company";
+        return "1. Create Company";
       case "CompanyUsers":
-        return "Add Users";
+        return "2. Add Users";
       case "TermsView":
-        return "Terms of Use";
+        return "3. Terms of Use";
       case "EnrollmentCompletedView":
-        return "Completed";
+        return "4. Completed";
       default:
         return "";
     }
@@ -56,14 +61,24 @@ const Page = () => {
       <Stepper
         steps={steps}
         activeStep={getCurrentStep()}
+        // onStepChange={(step) => {
+        //   const stepMap = {
+        //     "1. Create Company": "CompanyView",
+        //     "2. Add Users": "CompanyUsers",
+        //     "3. Terms of Use": "TermsView",
+        //     "4. Completed": "EnrollmentCompletedView",
+        //   };
+        //   navigateTo(stepMap[step]);
         onStepChange={(step) => {
-          const stepMap = {
-            "Create Company": "CompanyView",
-            "Add Users": "CompanyUsers",
-            "Terms of Use": "TermsView",
-            Completed: "EnrollmentCompletedView",
-          };
-          navigateTo(stepMap[step]);
+          if (step === "1. Create Company") {
+            navigateTo("CompanyView");
+          } else if (step === "2. Add Users") {
+            navigateTo("CompanyUsers");
+          } else if (step === "3. Terms of Use") {
+            navigateTo("TermsView");
+          } else if (step === "4. Completed") {
+            navigateTo("EnrollmentCompletedView");
+          }
         }}
       />
       {currentView === "CompanyView" && (
