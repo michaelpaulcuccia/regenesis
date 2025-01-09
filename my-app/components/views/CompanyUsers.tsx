@@ -14,15 +14,6 @@ const CompanyUsers: React.FC<CompanyUsersProps> = ({ onNext, onBack }) => {
   const { addUserToCompany } = useUser();
   const [users, setUsers] = useState([{ username: "", email: "" }]);
 
-  // useEffect(() => {
-  //   // Populate the form with existing company users from context
-  //   if (user?.company?.usersCompany?.length) {
-  //     if (user?.company?.usersCompany?.length > 0) {
-  //       setUsers(user.company.usersCompany);
-  //     }
-  //   }
-  // }, [user]);
-
   const handleUserChange = (
     index: number,
     field: "username" | "email",
