@@ -1,7 +1,5 @@
-// CompanyUsers.tsx
-
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUser } from "context/UserContext";
 import Input from "@components/ui/Input";
 import Button from "@components/ui/Button";
@@ -13,8 +11,17 @@ type CompanyUsersProps = {
 };
 
 const CompanyUsers: React.FC<CompanyUsersProps> = ({ onNext, onBack }) => {
-  const { addUserToCompany } = useUser();
+  const { user, addUserToCompany } = useUser();
   const [users, setUsers] = useState([{ username: "", email: "" }]);
+
+  useEffect(() => {
+    // Populate the form with existing company users from context
+    if (user?.company?.usersCompany?.length) {
+      if (user?.company?.usersCompany?.length > 0) {
+        setUsers(user?.company.usersCompany);
+      }
+    }
+  }, [user]);
 
   const handleUserChange = (
     index: number,
@@ -38,7 +45,7 @@ const CompanyUsers: React.FC<CompanyUsersProps> = ({ onNext, onBack }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Filter out any users with empty fields and add the valid ones
+    // Filter out invalid users and update context
     const validUsers = users.filter(
       (user) => user.username.trim() && user.email.trim()
     );
