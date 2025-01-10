@@ -14,7 +14,7 @@ const Card: React.FC<CardProps> = ({
   const cardContent = (
     <div
       className={`rounded-lg border border-gray-300 shadow-md bg-white py-4 px-6 ${className} ${
-        selfCentered ? "w-1/2" : ""
+        selfCentered ? "md:w-1/2 w-full" : ""
       }`}
     >
       {children}
@@ -23,7 +23,7 @@ const Card: React.FC<CardProps> = ({
 
   if (selfCentered) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center md:items-center h-screen">
         {cardContent}
       </div>
     );
