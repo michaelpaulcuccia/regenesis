@@ -61,14 +61,6 @@ const Page = () => {
       <Stepper
         steps={steps}
         activeStep={getCurrentStep()}
-        // onStepChange={(step) => {
-        //   const stepMap = {
-        //     "1. Create Company": "CompanyView",
-        //     "2. Add Users": "CompanyUsers",
-        //     "3. Terms of Use": "TermsView",
-        //     "4. Completed": "EnrollmentCompletedView",
-        //   };
-        //   navigateTo(stepMap[step]);
         onStepChange={(step) => {
           if (step === "1. Create Company") {
             navigateTo("CompanyView");

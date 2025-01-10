@@ -11,8 +11,21 @@ type CompanyUsersProps = {
 };
 
 const CompanyUsers: React.FC<CompanyUsersProps> = ({ onNext, onBack }) => {
-  const { addUserToCompany } = useUser();
+  const { user, addUserToCompany, removeUserFromCompany } = useUser();
   const [users, setUsers] = useState([{ username: "", email: "" }]);
+
+  //if usersCompany is stored in context but not in state, update
+  const isEmpty = users.every(
+    (user) => user.username.trim() === "" && user.email.trim() === ""
+  );
+  if (user?.company?.usersCompany.length && isEmpty) {
+    const updatedUsers = user.company.usersCompany.map((user) => ({
+      username: user.username,
+      email: user.email,
+    }));
+
+    setUsers(updatedUsers);
+  }
 
   const handleUserChange = (
     index: number,
@@ -29,6 +42,12 @@ const CompanyUsers: React.FC<CompanyUsersProps> = ({ onNext, onBack }) => {
   };
 
   const removeUserField = (index: number) => {
+    // Remove the user from the context first
+    if (user?.company?.usersCompany[index]) {
+      removeUserFromCompany(index);
+    }
+
+    //update the state by filtering out the user
     const updatedUsers = users.filter((_, i) => i !== index);
     setUsers(updatedUsers);
   };

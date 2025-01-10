@@ -17,7 +17,6 @@ const CompanyView: React.FC<CompanyViewProps> = ({ onNext }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Ensure company name is entered before proceeding
     if (companyName.trim()) {
       updateCompanyName(companyName);
       onNext();
