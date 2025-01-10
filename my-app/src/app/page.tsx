@@ -3,7 +3,7 @@ import React from "react";
 
 export default function page() {
   return (
-    <h2 className="font-medium tracking-tight text-slate-900 text-6xl text-center">
+    <h2 className="font-medium tracking-tight text-slate-900 text-6xl text-center animate-blur-in">
       Development <span className="text-[#2563EB]">made simple</span>
       <br />
       for your business needs

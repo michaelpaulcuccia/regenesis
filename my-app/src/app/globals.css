@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 html,
 body {
   max-width: 100vw;
@@ -24,4 +23,20 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+@keyframes blurIn {
+  0% {
+    filter: blur(5px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+/* Apply animation */
+.animate-blur-in {
+  animation: blurIn 1s ease-out forwards;
 }
