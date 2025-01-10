@@ -53,7 +53,7 @@ export default function NavBar() {
 
         {/* Dropdown Menu for medium screens*/}
         {isMenuOpen && (
-          <div className="absolute top-20 right-0 w-full bg-white shadow-md md:hidden flex flex-col items-start p-4 z-50">
+          <div className="absolute top-20 right-0 w-full bg-white shadow-lg border border-gray-200 rounded-md md:hidden flex flex-col items-start p-6 z-50">
             <div className="text-gray-700 hover:text-black hover:font-bold cursor-pointer mb-4">
               Features
             </div>
@@ -63,7 +63,12 @@ export default function NavBar() {
             <div className="text-gray-700 hover:text-black hover:font-bold cursor-pointer mb-4">
               Pricing
             </div>
-            <Button text="Get Started" href="/signup" color="primary" />
+            <Button
+              text="Get Started"
+              href="/signup"
+              color="primary"
+              onClick={() => setMenuOpen(false)}
+            />
           </div>
         )}
       </div>
