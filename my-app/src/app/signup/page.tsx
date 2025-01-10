@@ -22,7 +22,7 @@ const MyForm = () => {
 
   return (
     <>
-      <Card selfCentered={true}>
+      <Card selfCentered>
         <form
           onSubmit={handleSubmit}
           //onReset={handleReset}
