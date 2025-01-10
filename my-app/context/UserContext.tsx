@@ -20,12 +20,12 @@ interface UserContextType {
   signIn: (username: string, password: string) => void;
   updateEnrollment: () => void;
   addUserToCompany: (users: Array<{ username: string; email: string }>) => void;
+  removeUserFromCompany: (index: number) => void; // New function to remove a user
   updateCompanyName: (companyName: string) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-// Provider component
 export const UserProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
@@ -79,6 +79,23 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
     setUser(updatedUser);
   };
 
+  const removeUserFromCompany = (index: number) => {
+    if (!user) {
+      console.error("User is not signed in.");
+      return;
+    }
+
+    const updatedUser = {
+      ...user,
+      company: {
+        ...user.company,
+        usersCompany: user.company.usersCompany.filter((_, i) => i !== index),
+      },
+    };
+
+    setUser(updatedUser);
+  };
+
   const updateCompanyName = (companyName: string) => {
     if (user) {
       const updatedUser = {
@@ -101,6 +118,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
         signIn,
         updateEnrollment,
         addUserToCompany,
+        removeUserFromCompany,
         updateCompanyName,
       }}
     >
@@ -109,7 +127,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
   );
 };
 
-//Custom hook to access UserContext
+// Custom hook to access UserContext
 export const useUser = (): UserContextType => {
   const context = useContext(UserContext);
   if (!context) {
