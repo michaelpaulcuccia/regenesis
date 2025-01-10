@@ -7,7 +7,6 @@ import CompanyView from "@components/views/CompanyView";
 import CompanyUsers from "@components/views/CompanyUsers";
 import TermsView from "@components/views/TermsView";
 import EnrollmentCompletedView from "@components/views/EnrollmentCompletedView";
-import PageContainer from "@components/ui/PageContainer";
 
 const steps = [
   "1. Create Company",
@@ -29,11 +28,11 @@ const Page = () => {
 
   if (!user) {
     return (
-      <PageContainer>
+      <>
         <p className="text-center text-red-500">
           Restricted Access: Please sign up or log in.
         </p>
-      </PageContainer>
+      </>
     );
   }
 
@@ -57,7 +56,7 @@ const Page = () => {
   };
 
   return (
-    <PageContainer>
+    <>
       <Stepper
         steps={steps}
         activeStep={getCurrentStep()}
@@ -89,7 +88,7 @@ const Page = () => {
         />
       )}
       {currentView === "EnrollmentCompletedView" && <EnrollmentCompletedView />}
-    </PageContainer>
+    </>
   );
 };
 

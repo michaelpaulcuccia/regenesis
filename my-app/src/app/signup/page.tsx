@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import Input from "@components/ui/Input";
 import Button from "@components/ui/Button";
 import Card from "@components/ui/Card";
-import PageContainer from "@components/ui/PageContainer";
 import ButtonWrapper from "@components/ui/ButtonWrapper";
 import { useUser } from "context/UserContext";
 
@@ -22,7 +21,7 @@ const MyForm = () => {
   };
 
   return (
-    <PageContainer>
+    <>
       <Card selfCentered={true}>
         <form
           onSubmit={handleSubmit}
@@ -65,7 +64,7 @@ const MyForm = () => {
           </ButtonWrapper>
         </form>
       </Card>
-    </PageContainer>
+    </>
   );
 };
 
