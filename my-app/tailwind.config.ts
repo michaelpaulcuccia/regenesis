@@ -23,6 +23,7 @@ const config: Config = {
     "mt-12",
     "text-6xl",
     "text-[#2563EB]",
+    "mt-20",
   ],
   theme: {
     extend: {
